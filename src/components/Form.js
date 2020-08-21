@@ -9,6 +9,7 @@ class Form extends Component {
       year: '',
       posterImg: ''
     }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(e) {
@@ -17,10 +18,16 @@ class Form extends Component {
     })
   }
 
+  handleSubmit(e) {
+    e.preventDefault()
+    const { title, year, posterImg } = this.state
+    this.props.addMovie(title, year, posterImg)
+  }
+
 
   render() {
     return (
-      <form className='Form'>
+      <form onSubmit={(e) => this.handleSubmit(e)} className='Form'>
         <input placeholder='Title' onChange={this.handleChange} name='title' />
         <input placeholder='Year' onChange={this.handleChange} name='year' />
         <input placeholder='Poster URL' onChange={this.handleChange} name='posterImg' />
